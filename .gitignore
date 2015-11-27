@@ -1,0 +1,10 @@
+####  IDE Specific
+.project
+.buildpath
+.settings/*
+.idea/
+
+composer.lock
+
+bin/
+vendor/
