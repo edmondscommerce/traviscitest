@@ -8,4 +8,9 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(true, "some blah");
     }
+
+    public function testSecondExample()
+    {
+        $this->assertTrue(true, "some blah");
+    }
 }
