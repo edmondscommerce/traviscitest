@@ -1,35 +1,32 @@
 language: php
-
 sudo: false
-
 before_install:
-    - composer self-update
-
+- composer self-update
 php:
-    - 5.4
-    - 5.5
-    - 5.6
-    - 7.0
-    - hhvm
-
+- 5.4
+- 5.5
+- 5.6
+- 7.0
+- hhvm
 matrix:
-    fast_finish: true
-    include:
-        - php: 5.4
-          env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
-    allow_failures:
-        - php: 7.0
-
+  fast_finish: true
+  include:
+  - php: 5.4
+    env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+  allow_failures:
+  - php: 7.0
 cache:
-    directories:
-        - $HOME/.composer/cache
-
+  directories:
+  - "$HOME/.composer/cache"
 install:
-    - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction
-
+- travis_retry composer update ${COMPOSER_FLAGS} --no-interaction
 before_script:
-    - if [ "$TRAVIS_PHP_VERSION" = "hhv*" ]; then cat tests/fixtures/travis.ini >> /etc/hhvm/php.ini; fi;
-    - if [ "$TRAVIS_PHP_VERSION" = "php*" ]; then phpenv config-add tests/fixtures/travis.ini ; fi;
-
+- if [ "$TRAVIS_PHP_VERSION" = "hhv*" ]; then cat tests/fixtures/travis.ini >> /etc/hhvm/php.ini;
+  fi;
+- if [ "$TRAVIS_PHP_VERSION" = "php*" ]; then phpenv config-add tests/fixtures/travis.ini
+  ; fi;
 script:
-    - make tests
+- make tests
+notifications:
+  slack:
+    secure: j4BPliyCeOcPpeB1jNev78ipZAybVjj29smpIVlrMscZPUXqWy+Yrpb+31YeChcxWcIbYIwqe1hXuXc59TZTxpPjnv8CnX9G30E9IE+Kgx2SjB/xviE+pNieCu9PxzHSiYZhCHNgoxX7qbDXFdEvakyjcotazbC7yAbR4CPB7WIx919U5u5pZgBRen/kJapol/olMwWOl401z6awBmeCb7ukHOvwkluxcmmNO5rmn0k50SX6+V/9SFz8/Deo4YsqnfCbVKXk4GJ04SdY/aOUmSt2HUX/jHdUnQxrSsyTDc1I2qfrAlojStq6IGRqm7tKWCFJfNCxqffkogExP1ypjdK4A8sGwNVdvDEWe8JtON/23uZjhsgH9tvJhDD7bPdJ04b2uk7sU+eG2Zb6WJFTRHqxzBgkXkYxnHiLqd12mTntO8W/dq70RbLMCDTkaBAhNDjRbU3BBq1St8SuiNS71jqTR21QXxGznQmAfPEakZAuwYsoFmYE4aVStXxfV5mGyQEBpgiyAVVhC9FYrSYfBQO2NWnMkzE3ItAtSuyrDsUZMMVh415Cl26rTCn/RcmgLhANhcm5aB8ZsijD1q+SJOVcEIjbEQGGZbi4vzTm7RnGnIr0usOABVEbYGyqfkZ+Fcc3h0eefJo88i4x1Vgm442Py1RjZzfH6TrYMJG6CTQ=
